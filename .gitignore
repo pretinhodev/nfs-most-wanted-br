@@ -1,0 +1,12 @@
+# Binários / grandes demais
+*.exe
+*.dll
+*.asi
+*.iso
+*.zip
+*.rar
+*.7z
+
+# Sistema
+Thumbs.db
+Desktop.ini
