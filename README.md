@@ -51,16 +51,25 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 1. Baixe o repack DODI do "Need for Speed Most Wanted Black Edition".
 2. Instale normalmente (o repack já vem com o jogo funcional e o crack).
 
-### 2. Aplique a tradução (GameVicio)
-> Copie os arquivos da pasta `Traducao-GameVicio/` para a **pasta `LANGUAGES`** da instalação,
-> sobrescrevendo quando solicitado.
+### 2. Aplique a tradução (GameVicio) — ANTES dos mods
+> ⚠️ **Ordem importa:** a tradução deve ser instalada **antes** dos mods, pois ambos mexem
+> nos arquivos de idioma/`scripts` e a instalação da tradução pode sobrescrever os do jogo.
+
+A tradução brasileira da GameVicio (**v2.03**) tem um **instalador próprio**:
 
 ```
-C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\LANGUAGES\
+Tradução PT-BR Need for Speed Most Wanted.exe   (NSIS ~347 KB, © GameVicio)
 ```
 
-> No jogo, selecione o idioma **Spanish** (Espanhol) — a tradução brasileira da GameVicio
-> usa esse slot.
+1. Baixe o instalador na página da GameVicio (link acima) e **execute** o `.exe`.
+2. Escolha a pasta de instalação do jogo e confirme. Ele aplica os arquivos na pasta `LANGUAGES\`.
+   ```
+   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\LANGUAGES\
+   ```
+3. No jogo, selecione o idioma **Spanish** (Espanhol) — a tradução brasileira usa esse slot.
+
+> Alternativa manual: os arquivos de tradução também estão disponíveis neste repo
+> em `Traducao-GameVicio/` — copie-os para a pasta `LANGUAGES\`, sobrescrevendo quando pedir.
 
 ### 3. Instale o ASI Loader + mods
 O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta da instalação:
