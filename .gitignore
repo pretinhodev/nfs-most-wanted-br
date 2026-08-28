@@ -1,11 +1,24 @@
-# Binários / grandes demais
-*.exe
-*.dll
-*.asi
+# Arquivos ORIGINAIS do jogo (protegidos por copyright — NÃO distribuir)
+speed.exe
+*.bun
+*.bmp
+*.256
+*.wav
+*.mp3
+*.big
+*.lzc
+*.dat
+
+# Mounts/imagens de disco
 *.iso
-*.zip
+*.img
+*.cue
+*.mdf
+*.mds
 *.rar
+*.zip
 *.7z
+*.torrent
 
 # Sistema
 Thumbs.db

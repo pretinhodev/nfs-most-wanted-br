@@ -16,8 +16,10 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 | Pasta | Conteúdo |
 |-------|----------|
 | `Traducao-GameVicio/` | Arquivos de língua da tradução brasileira (para aplicar sobre o jogo) |
-| `Mods/NFSMWExOpts/` | Config `NFSMWExtraOptionsSettings.ini` do mod Extra Options |
-| `Mods/WidescreenFix/` | Config `NFSMostWanted.WidescreenFix.ini` do Widescreen Fix |
+| `Mods/ASI-Loader/` | `dinput8.dll` — Ultimate ASI Loader (ThirteenAG), carregador dos `.asi` |
+| `Mods/ExtraOptions/` | `NFSMWExtraOptions.asi` + `NFSMWExtraOptionsSettings.ini` (NFSMW ExOpts) |
+| `Mods/WidescreenFix/` | `NFSMostWanted.WidescreenFix.asi` + `.tpk` + `.ini` (Widescreen Fix) |
+| `Mods/Lan-Server/` | `server.dll` + `server.cfg` — emulador de servidor LAN |
 
 ---
 
@@ -38,6 +40,8 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 - **NFSMW Widescreen Fix** (ThirteenAG):
   - Repositório: https://github.com/ThirteenAG/WidescreenFixesPack
   - (O `NFSMostWanted.WidescreenFix.asi` é o arquivo do pack que instala no diretório `scripts/`.)
+- **Ultimate ASI Loader** (ThirteenAG) — usado pelo `dinput8.dll`:
+  - Repositório: https://github.com/ThirteenAG/Ultimate-ASI-Loader
 
 ---
 
@@ -58,19 +62,25 @@ C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\LAN
 > No jogo, selecione o idioma **Spanish** (Espanhol) — a tradução brasileira da GameVicio
 > usa esse slot.
 
-### 3. Instale o Widescreen Fix
-1. Baixe o pack do ThirteenAG (link acima).
-2. Coloque `NFSMostWanted.WidescreenFix.asi` (e dependências) na pasta `scripts/` da instalação:
+### 3. Instale o ASI Loader + mods
+O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta da instalação:
    ```
-   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\scripts\
+   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
    ```
-3. (Opcional) Copie o `NFSMostWanted.WidescreenFix.ini` deste repo para ajustar a resolução/FOV/HUD.
+   - Copie `Mods/ASI-Loader/dinput8.dll` → pasta raiz da instalação.
+   - Copie `Mods/WidescreenFix/NFSMostWanted.WidescreenFix.asi` e `.tpk` → pasta `scripts/`.
+   - Copie `Mods/ExtraOptions/NFSMWExtraOptions.asi` → pasta `scripts/`.
+   - (Opcional) Ajuste os `.ini` (configs) na pasta `scripts/`.
 
-### 4. Instale o Extra Options
-1. Baixe o mod do repositório ExOptsTeam (link acima).
-2. Coloque `dinput8.dll` e a pasta `scripts/` na pasta de instalação.
-3. (Opcional) Copie o `NFSMWExtraOptionsSettings.ini` deste repo.
-4. Rode `speed.exe`.
+### 4. Emulador de servidor LAN (opcional)
+Para jogar online/LAN:
+   ```
+   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
+   ```
+   - Copie `Mods/Lan-Server/server.dll` e `server.cfg` → pasta raiz da instalação.
+
+### 5. Rode o jogo
+   Rode `speed.exe` (v1.3).
 
 > ⚠️ O Extra Options exige o **speed.exe v1.3**. Se o seu repack vier com outra versão,
 > use o "NFS Most Wanted NO DVD Crack RELOADED".
