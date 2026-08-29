@@ -117,6 +117,10 @@ O script vai:
 - **Detectar a GPU automaticamente** (AMD integrada / AMD dedicada / NVIDIA / Intel) e ajustar o `NFSMostWanted.WidescreenFix.ini`
 - Perguntar se quer o **servidor LAN** e a **câmera com stick/mouse**
 
+> 💡 **Múltiplas GPUs** (ex.: notebook com Intel/AMD integrada + NVIDIA dedicada):
+> o script lista todas as GPUs encontradas e **prefere a placa dedicada** (a usada em jogos).
+> Se precisar forçar outra, use `-GpuProfile 1-4`.
+
 ### Opções avançadas
 
 | Opção | Efeito |

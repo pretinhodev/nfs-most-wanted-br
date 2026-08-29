@@ -67,27 +67,10 @@ function Copy-IfExists {
     Write-Host "  copiado  $(Split-Path -Leaf $Source) -> $($DestPath.Replace($GamePath, '<jogo>'))"
 }
 
-function Get-GpuProfile {
-    <#
-    Detecta o perfil de ajuste a partir da GPU instalada.
-    Retorna:
-      1 = AMD integrada/Radeon (performance)
-      2 = AMD dedicada (qualidade)
-      3 = NVIDIA (qualidade)
-      4 = Intel (integrada, performance)
-    #>
-    $controllers = $null
-    if (Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
-        $controllers = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue
-    }
-    if (-not $controllers) {
-        try { $controllers = Get-WmiObject Win32_VideoController -ErrorAction SilentlyContinue } catch { }
-    }
-    $gpu = $controllers | Select-Object -First 1
-    if (-not $gpu) { return 1 }
-
-    $name = "$($gpu.Name)"
-    $pnp = "$($gpu.PNPDeviceID)"
+function Get-PnpProfile {
+    param([string]$Name, [string]$PNP)
+    $name = "$Name"
+    $pnp = "$PNP"
     $desc = "$name $pnp"
 
     if ($desc -match 'VEN_10DE' -or $name -match 'NVIDIA|GeForce') { return 3 }
@@ -97,6 +80,47 @@ function Get-GpuProfile {
         return 2
     }
     return 1
+}
+
+function Get-GpuProfile {
+    <#
+    Detecta o perfil de ajuste a partir da(s) GPU(s) instalada(s).
+    Retorna:
+      1 = AMD integrada/Radeon (performance)
+      2 = AMD dedicada (qualidade)
+      3 = NVIDIA (qualidade)
+      4 = Intel (integrada, performance)
+    Com multiplas GPUs, prefire a placa dedicada (NVIDIA/AMD), que e a usada p/ jogos.
+    #>
+    $controllers = $null
+    if (Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
+        $controllers = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue
+    }
+    if (-not $controllers) {
+        try { $controllers = Get-WmiObject Win32_VideoController -ErrorAction SilentlyContinue } catch { }
+    }
+    if (-not $controllers) { return 1 }
+
+    $gpus = @($controllers | Where-Object { $_.Name -and $_.Name -notmatch 'Microsoft Basic|Basic Display|Virtual' })
+    if ($gpus.Count -eq 0) { $gpus = @($controllers) }
+
+    if ($gpus.Count -eq 1) {
+        return Get-PnpProfile $gpus[0].Name $gpus[0].PNPDeviceID
+    }
+
+    $profiles = $gpus | ForEach-Object {
+        [pscustomobject]@{ Name = "$($_.Name)"; Profile = (Get-PnpProfile "$($_.Name)" "$($_.PNPDeviceID)") }
+    }
+    Write-Host '  Multiplas GPUs detectadas:'
+    $profiles | ForEach-Object { Write-Host "    - $($_.Name)  (perfil $($_.Profile))" }
+
+    $discrete = $profiles | Where-Object { $_.Profile -eq 3 -or $_.Profile -eq 2 } | Select-Object -First 1
+    if ($discrete) {
+        Write-Host "  Preferindo a placa dedicada: $($discrete.Name)"
+        return [int]$discrete.Profile
+    }
+    Write-Host '  Nenhuma placa dedicada; usando a primeira GPU.'
+    return [int]($profiles | Select-Object -First 1).Profile
 }
 
 # ---------------------------------------------------------------------------
