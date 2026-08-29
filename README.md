@@ -28,6 +28,7 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 | `Mods/ASI-Loader/` | `dinput8.dll` — Ultimate ASI Loader (ThirteenAG), carregador dos `.asi` |
 | `Mods/ExtraOptions/` | `NFSMWExtraOptions.asi` + `NFSMWExtraOptionsSettings.ini` (NFSMW ExOpts) |
 | `Mods/WidescreenFix/` | `NFSMostWanted.WidescreenFix.asi` + `.tpk` + `.ini` (Widescreen Fix) |
+| `Mods/XtendedInput/` | `NFS_XtendedInput.asi` + `.ini` + `.default.ini` + `XtendedInputButtons.tpk` + `nfs_cursor.cur` (XtendedInput) |
 | `Mods/Lan-Server/` | `server.dll` + `server.cfg` — emulador de servidor LAN |
 
 ---
@@ -51,6 +52,9 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
   - (O `NFSMostWanted.WidescreenFix.asi` é o arquivo do pack que instala no diretório `scripts/`.)
 - **Ultimate ASI Loader** (ThirteenAG) — usado pelo `dinput8.dll`:
   - Repositório: https://github.com/ThirteenAG/Ultimate-ASI-Loader
+- **NFS XtendedInput** (xan1242) — suporte a controle/gamepad moderno:
+  - Repositório: https://github.com/xan1242/NFS-XtendedInput
+  - Releases (baixe o `Release-MW-Pack.zip`, versão MW 32 bits): https://github.com/xan1242/NFS-XtendedInput/releases
 
 ---
 
@@ -105,7 +109,35 @@ Para jogar online/LAN:
    ```
    - Copie `Mods/Lan-Server/server.dll` e `server.cfg` → pasta raiz da instalação.
 
-### 5. Rode o jogo
+### 5. Mod do controle (gamepad) — NFS XtendedInput
+
+O NFSMW 2005 só entende controles **DirectInput** e não enxerga controles
+Xbox/XInput (nem a maioria dos controles modernos). O **NFS XtendedInput**
+adiciona suporte **XInput nativo** + ícones de botão + tudo rebindável.
+Ele usa o mesmo **Ultimate ASI Loader** já instalado (`dinput8.dll`), então a
+instalação é só copiar os arquivos de `Mods/XtendedInput/`:
+   ```
+   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
+   ```
+   - Copie `NFS_XtendedInput.asi`, `NFS_XtendedInput.ini`, `NFS_XtendedInput.default.ini`
+     e `nfs_cursor.cur` → pasta `scripts/`.
+   - Copie `XtendedInputButtons.tpk` → pasta `GLOBAL/`.
+   - Copie `EventReference.txt` → pasta raiz da instalação.
+
+> ⚠️ No menu `Controls` do jogo o mod **desabilita a tela (crasha)** — **NÃO entre nele**.
+> A configuração é feita pelos `.ini`:
+> - Opções gerais: `scripts\NFS_XtendedInput.ini` (deadzone, ícones, etc.)
+> - Mapeamento de botões (por save): `scripts\XtendedInputMaps\<nome do save>\NFS_XtendedInput.usermap.ini`
+> - Referência de eventos: `EventReference.txt`
+>
+> 🔧 O mapeamento de botões é **por save (perfil)**, então cada jogador rebinda o seu.
+> O `setup-config.ps1` instala o mod mas **não** copia o mapeamento de ninguém.
+
+Se os botões não responderem, rode o jogo **como Administrador** ou mova a pasta
+do jogo para fora de `Program Files` (virtualização UAC). Alternativas: **x360ce**
+ou **reWASD** (mapeador pago).
+
+### 6. Rode o jogo
    Rode `speed.exe` (v1.3).
 
 > ⚠️ O Extra Options exige o **speed.exe v1.3**. Se o seu repack vier com outra versão,

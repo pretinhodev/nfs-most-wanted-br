@@ -157,6 +157,21 @@ foreach ($f in 'NFSMWExtraOptions.asi', 'NFSMWExtraOptionsSettings.ini') {
     Copy-IfExists (Join-Path $RepoRoot "Mods\ExtraOptions\$f") (Join-Path $scriptsDir $f)
 }
 
+Write-Host '  XtendedInput (controle)...'
+$xi = Join-Path $RepoRoot 'Mods\XtendedInput'
+if (Test-Path -LiteralPath $xi) {
+    Copy-IfExists (Join-Path $xi 'NFS_XtendedInput.asi') (Join-Path $scriptsDir 'NFS_XtendedInput.asi')
+    Copy-IfExists (Join-Path $xi 'NFS_XtendedInput.ini') (Join-Path $scriptsDir 'NFS_XtendedInput.ini')
+    Copy-IfExists (Join-Path $xi 'NFS_XtendedInput.default.ini') (Join-Path $scriptsDir 'NFS_XtendedInput.default.ini')
+    Copy-IfExists (Join-Path $xi 'nfs_cursor.cur') (Join-Path $scriptsDir 'nfs_cursor.cur')
+    Copy-IfExists (Join-Path $xi 'XtendedInputButtons.tpk') (Join-Path $GamePath 'GLOBAL\XtendedInputButtons.tpk')
+    Copy-IfExists (Join-Path $xi 'EventReference.txt') (Join-Path $GamePath 'EventReference.txt')
+    Write-Host '  (O mapeamento de botões por save NÃO é copiado — cada jogador rebinda no próprio perfil.)'
+}
+else {
+    Write-Warning "Pasta $($xi.Replace($RepoRoot, '.')) não encontrada, pulando XtendedInput."
+}
+
 if ($InstallLan) {
     Copy-IfExists (Join-Path $RepoRoot 'Mods\Lan-Server\server.dll') (Join-Path $GamePath 'server.dll')
     Copy-IfExists (Join-Path $RepoRoot 'Mods\Lan-Server\server.cfg') (Join-Path $GamePath 'server.cfg')
