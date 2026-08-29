@@ -114,18 +114,18 @@ conforme a sua GPU — sem precisar copiar arquivos na mão.
 O script vai:
 - Detectar a pasta do jogo (usa o caminho do DODI Repacks se existir, senão pergunta)
 - Copiar `dinput8.dll` (ASI Loader) e os mods (`WidescreenFix`, `ExtraOptions`) para `scripts/`
-- Perguntar o **perfil de GPU** (AMD integrada / AMD dedicada / NVIDIA)
+- **Detectar a GPU automaticamente** (AMD integrada / AMD dedicada / NVIDIA / Intel) e ajustar o `NFSMostWanted.WidescreenFix.ini`
 - Perguntar se quer o **servidor LAN** e a **câmera com stick/mouse**
-- Aplicar os ajustes no `NFSMostWanted.WidescreenFix.ini`
 
 ### Opções avançadas
 
 | Opção | Efeito |
 |-------|--------|
 | `-GamePath "C:\...\Need For Speed Most Wanted Black Edition"` | Define a pasta do jogo direto |
+| `-GpuProfile 1-4` | Força o perfil (1 = AMD integrada, 2 = AMD dedicada, 3 = NVIDIA, 4 = Intel) |
 | `-EnableCamera` | Liga a câmera com stick/mouse (`[CAMERA] Enable = 1`) |
 | `-InstallLan` | Instala o servidor LAN sem perguntar |
-| `-SkipPrompts` | Execução silenciosa (perfil AMD integrada, câmera off, sem LAN) |
+| `-SkipPrompts` | Execução silenciosa (câmera off, sem LAN) |
 
 Exemplo:
 

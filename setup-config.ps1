@@ -12,9 +12,9 @@
 [CmdletBinding()]
 param(
     [string]$GamePath = '',
+    [int]$GpuProfile = 0,
     [switch]$EnableCamera,
     [switch]$InstallLan,
-    [switch]$SkipGpuPrompt,
     [switch]$SkipPrompts
 )
 
@@ -65,6 +65,38 @@ function Copy-IfExists {
     if ($destDir) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
     Copy-Item -LiteralPath $Source -Destination $DestPath -Force
     Write-Host "  copiado  $(Split-Path -Leaf $Source) -> $($DestPath.Replace($GamePath, '<jogo>'))"
+}
+
+function Get-GpuProfile {
+    <#
+    Detecta o perfil de ajuste a partir da GPU instalada.
+    Retorna:
+      1 = AMD integrada/Radeon (performance)
+      2 = AMD dedicada (qualidade)
+      3 = NVIDIA (qualidade)
+      4 = Intel (integrada, performance)
+    #>
+    $controllers = $null
+    if (Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
+        $controllers = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue
+    }
+    if (-not $controllers) {
+        try { $controllers = Get-WmiObject Win32_VideoController -ErrorAction SilentlyContinue } catch { }
+    }
+    $gpu = $controllers | Select-Object -First 1
+    if (-not $gpu) { return 1 }
+
+    $name = "$($gpu.Name)"
+    $pnp = "$($gpu.PNPDeviceID)"
+    $desc = "$name $pnp"
+
+    if ($desc -match 'VEN_10DE' -or $name -match 'NVIDIA|GeForce') { return 3 }
+    if ($desc -match 'VEN_8086' -or $name -match 'Intel.*(HD|UHD|Iris)|HD Graphics|Intel.*Graphics') { return 4 }
+    if ($desc -match 'VEN_1002' -or $name -match 'Radeon|ATI|AMD' -or $name -match '^AMD ') {
+        if ($name -match 'Radeon.{0,10}Graphics|Radeon Vega|Radeon.{0,4}Vega|Vega 3|Vega 8|Vega 11|Ryzen|Integrated|Radeon.{0,4} 8|Radeon.{0,4} 7') { return 1 }
+        return 2
+    }
+    return 1
 }
 
 # ---------------------------------------------------------------------------
@@ -120,18 +152,15 @@ else {
 # 3) Perfil de GPU
 # ---------------------------------------------------------------------------
 Write-Step 'Perfil de GPU'
-if ($SkipGpuPrompt -or $SkipPrompts) {
-    $gpu = 1
+if ($GpuProfile -ge 1 -and $GpuProfile -le 4) {
+    $gpu = $GpuProfile
+    Write-Host "  Perfil forcado via -GpuProfile: $gpu"
 }
 else {
-    Write-Host '  Escolha o perfil de ajuste:'
-    Write-Host '    1) AMD integrada/Radeon (padrao, otimizado p/ performance)'
-    Write-Host '    2) AMD dedicada (mais qualidade)'
-    Write-Host '    3) NVIDIA (mais qualidade)'
-    $choice = Read-Host '    Opcao [1]'
-    $choice = if ($choice) { $choice } else { '1' }
-    $gpu = [int]$choice
+    $gpu = Get-GpuProfile
 }
+$perfilNome = @{ 1 = 'AMD integrada (performance)'; 2 = 'AMD dedicada (qualidade)'; 3 = 'NVIDIA (qualidade)'; 4 = 'Intel integrada (performance)' }[$gpu]
+Write-Host "  GPU detectada: $gpu - $perfilNome"
 
 $ini = Join-Path $scriptsDir 'NFSMostWanted.WidescreenFix.ini'
 if (-not (Test-Path -LiteralPath $ini)) {
@@ -161,7 +190,14 @@ switch ($gpu) {
         Set-IniKey $ini 'GRAPHICS' 'AutoScaleShadowsRes' '1'
         Set-IniKey $ini 'GRAPHICS' 'DisableMotionBlur' '0'
     }
-    default { throw 'Opcao de GPU invalida.' }
+    4 {
+        Set-IniKey $ini 'GRAPHICS' 'ForcedGPUVendor' '0x8086'
+        Set-IniKey $ini 'GRAPHICS' 'ShadowsRes' '1024'
+        Set-IniKey $ini 'GRAPHICS' 'ImproveShadowLOD' '0'
+        Set-IniKey $ini 'GRAPHICS' 'AutoScaleShadowsRes' '0'
+        Set-IniKey $ini 'GRAPHICS' 'DisableMotionBlur' '1'
+    }
+    default { throw 'Perfil de GPU invalido.' }
 }
 
 # ---------------------------------------------------------------------------
