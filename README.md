@@ -96,6 +96,45 @@ Para jogar online/LAN:
 
 ---
 
+## 🤖 Configurador automático (setup-config.ps1)
+
+O **`setup-config.ps1`** copia os mods para a pasta do jogo e ajusta as configurações
+conforme a sua GPU — sem precisar copiar arquivos na mão.
+
+### Como usar
+
+1. Baixe/clone este repositório.
+2. Abra o **PowerShell** na pasta do repositório.
+3. Execute:
+
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File setup-config.ps1
+   ```
+
+O script vai:
+- Detectar a pasta do jogo (usa o caminho do DODI Repacks se existir, senão pergunta)
+- Copiar `dinput8.dll` (ASI Loader) e os mods (`WidescreenFix`, `ExtraOptions`) para `scripts/`
+- Perguntar o **perfil de GPU** (AMD integrada / AMD dedicada / NVIDIA)
+- Perguntar se quer o **servidor LAN** e a **câmera com stick/mouse**
+- Aplicar os ajustes no `NFSMostWanted.WidescreenFix.ini`
+
+### Opções avançadas
+
+| Opção | Efeito |
+|-------|--------|
+| `-GamePath "C:\...\Need For Speed Most Wanted Black Edition"` | Define a pasta do jogo direto |
+| `-EnableCamera` | Liga a câmera com stick/mouse (`[CAMERA] Enable = 1`) |
+| `-InstallLan` | Instala o servidor LAN sem perguntar |
+| `-SkipPrompts` | Execução silenciosa (perfil AMD integrada, câmera off, sem LAN) |
+
+Exemplo:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File setup-config.ps1 -GamePath "C:\Jogos\NFSMW" -InstallLan
+```
+
+---
+
 ## 🎮 Requisitos dos mods
 
 - **Extra Options v10.0.1.1337** — exige `speed.exe` v1.3 (5,75 MB / 6.029.312 bytes).
