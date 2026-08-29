@@ -103,6 +103,21 @@ Para jogar online/LAN:
 
 ---
 
+## ⚙️ Configurações atuais do WidescreenFix
+
+Configurações otimizadas para **GPU integrada AMD (Radeon, Ryzen 5 4600G)** em 1080p:
+
+- **`ForcedGPUVendor = 0x1002`** — força o vendor **ATI/AMD** (corrige opções de vídeo/renderer para a GPU certa)
+- **`Enable = 0`** (seção `[CAMERA]`) — **câmera com stick/mouse desativada** (o controle usa os binds padrão sem conflito no analógico direito)
+- **`ShadowsRes = 1024`** — sombras otimizadas para GPU integrada
+- **`DisableMotionBlur = 1`** — desativado para performance
+- **`SimRate = -1`** — FPS destravado (match da taxa de atualização do monitor)
+
+Para habilitar a câmera de novo, mude `Enable = 1` na seção `[CAMERA]` do
+`Mods/WidescreenFix/NFSMostWanted.WidescreenFix.ini`.
+
+---
+
 ## 📄 Licenças
 
 - **Extra Options**: GNU GPLv3 (© ExOpts Team).
