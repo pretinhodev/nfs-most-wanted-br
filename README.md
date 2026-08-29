@@ -214,6 +214,7 @@ Para habilitar a câmera de novo, mude `Enable = 1` na seção `[CAMERA]` do
 
 - **Extra Options**: GNU GPLv3 (© ExOpts Team).
 - **Widescreen Fix**: repositório de ThirteenAG (consulte a licença do pack).
+- **NFS XtendedInput**: MIT (© xan1242).
 - **Tradução GameVicio**: uso autorizado para fins de jogo; créditos à GameVicio.
 - **NFS Most Wanted**: © EA Games / Criterion Games. Distribuído aqui apenas como *link*.
 
