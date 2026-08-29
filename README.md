@@ -11,6 +11,15 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 
 ---
 
+> ⚙️ **IMPORTANTE — ajuste para o seu PC**
+> As configurações deste repositório (`.ini` em `Mods/`) foram feitas para o **PC do autor**
+> (GPU integrada **AMD Radeon, Ryzen 5 4600G**, 1080p).
+> **Depois de instalar o jogo, rode o `setup-config.ps1`** (veja abaixo) — ele detecta a sua GPU,
+> copia os mods e ajusta o gráfico **para o seu computador**. Não use os `.ini` direto como estão
+> sem rodar o script.
+
+---
+
 ## 📦 O que tem neste repositório
 
 | Pasta | Conteúdo |
@@ -72,6 +81,10 @@ Tradução PT-BR Need for Speed Most Wanted.exe   (NSIS ~347 KB, © GameVicio)
 > em `Traducao-GameVicio/` — copie-os para a pasta `LANGUAGES\`, sobrescrevendo quando pedir.
 
 ### 3. Instale o ASI Loader + mods
+> ⚡ **Recomendado:** rode o `setup-config.ps1` (seção **Configurador automático** abaixo).
+> Ele copia os mods **e** ajusta o gráfico para a **sua** GPU. Os passos manuais abaixo
+> são só para referência.
+
 O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta da instalação:
    ```
    C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
@@ -80,6 +93,10 @@ O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta da ins
    - Copie `Mods/WidescreenFix/NFSMostWanted.WidescreenFix.asi` e `.tpk` → pasta `scripts/`.
    - Copie `Mods/ExtraOptions/NFSMWExtraOptions.asi` → pasta `scripts/`.
    - (Opcional) Ajuste os `.ini` (configs) na pasta `scripts/`.
+
+> ⚙️ Os `.ini` deste repo estão calibrados para o **PC do autor** (AMD integrada, Ryzen 5 4600G).
+> Rodando o `setup-config.ps1` o gráfico é ajustado para a GPU da **sua máquina** (AMD integrada,
+> AMD dedicada, NVIDIA ou Intel).
 
 ### 4. Emulador de servidor LAN (opcional)
 Para jogar online/LAN:
