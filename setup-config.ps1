@@ -3,8 +3,8 @@
 .SYNOPSIS
   Configurador do Need for Speed: Most Wanted - Black Edition (mods + ajustes).
 .DESCRIPTION
-  Copia os arquivos dos mods (ASI Loader, WidescreenFix, Extra Options e servidor LAN)
-  para a pasta do jogo e ajusta as configuracoes (.ini) conforme a sua GPU.
+Copia os arquivos dos mods (ASI Loader, WidescreenFix, Extra Options e servidor LAN)
+    para a pasta do jogo e ajusta as configurações (.ini) conforme a sua GPU.
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File setup-config.ps1
 #>
@@ -50,7 +50,7 @@ function Set-IniKey {
         $lines.Add($line)
     }
     if (-not $found) {
-        Write-Warning "Chave '$Key' nao encontrada na secao [$Section] de '$Path'."
+        Write-Warning "Chave '$Key' não encontrada na seção [$Section] de '$Path'."
     }
     Set-Content -LiteralPath $Path -Value $lines -Encoding UTF8
 }
@@ -58,7 +58,7 @@ function Set-IniKey {
 function Copy-IfExists {
     param([string]$Source, [string]$DestPath)
     if (-not (Test-Path -LiteralPath $Source)) {
-        Write-Warning "Fonte nao encontrada, pulando: $($Source.Replace($RepoRoot, '.'))"
+        Write-Warning "Fonte não encontrada, pulando: $($Source.Replace($RepoRoot, '.'))"
         return
     }
     $destDir = Split-Path -Parent $DestPath
@@ -90,7 +90,7 @@ function Get-GpuProfile {
       2 = AMD dedicada (qualidade)
       3 = NVIDIA (qualidade)
       4 = Intel (integrada, performance)
-    Com multiplas GPUs, prefire a placa dedicada (NVIDIA/AMD), que e a usada p/ jogos.
+    Com múltiplas GPUs, prefira a placa dedicada (NVIDIA/AMD), que é a usada p/ jogos.
     #>
     $controllers = $null
     if (Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
@@ -111,7 +111,7 @@ function Get-GpuProfile {
     $profiles = $gpus | ForEach-Object {
         [pscustomobject]@{ Name = "$($_.Name)"; Profile = (Get-PnpProfile "$($_.Name)" "$($_.PNPDeviceID)") }
     }
-    Write-Host '  Multiplas GPUs detectadas:'
+    Write-Host '  Múltiplas GPUs detectadas:'
     $profiles | ForEach-Object { Write-Host "    - $($_.Name)  (perfil $($_.Profile))" }
 
     $discrete = $profiles | Where-Object { $_.Profile -eq 3 -or $_.Profile -eq 2 } | Select-Object -First 1
@@ -129,14 +129,14 @@ function Get-GpuProfile {
 if (-not $GamePath) {
     if (Test-Path -LiteralPath $DefaultGamePath) {
         $GamePath = $DefaultGamePath
-        Write-Host "Usando pasta padrao do jogo: $GamePath"
+        Write-Host "Usando pasta padrão do jogo: $GamePath"
     }
     else {
-        $GamePath = Read-Host 'Digite o caminho da instalacao do jogo (onde fica o speed.exe)'
+        $GamePath = Read-Host 'Digite o caminho da instalação do jogo (onde fica o speed.exe)'
     }
 }
 if (-not (Test-Path -LiteralPath (Join-Path $GamePath 'speed.exe'))) {
-    throw "Pasta do jogo invalida (speed.exe nao encontrado): $GamePath"
+    throw "Pasta do jogo inválida (speed.exe não encontrado): $GamePath"
 }
 Write-Step "Pasta do jogo: $GamePath"
 
@@ -162,7 +162,7 @@ if ($InstallLan) {
     Copy-IfExists (Join-Path $RepoRoot 'Mods\Lan-Server\server.cfg') (Join-Path $GamePath 'server.cfg')
 }
 elseif ($SkipPrompts) {
-    Write-Host '  (SkipPrompts: servidor LAN nao instalado)'
+    Write-Host '  (SkipPrompts: servidor LAN não instalado)'
 }
 else {
     $ans = Read-Host 'Instalar servidor LAN (server.dll/cfg)? (s/N)'
@@ -178,7 +178,7 @@ else {
 Write-Step 'Perfil de GPU'
 if ($GpuProfile -ge 1 -and $GpuProfile -le 4) {
     $gpu = $GpuProfile
-    Write-Host "  Perfil forcado via -GpuProfile: $gpu"
+    Write-Host "  Perfil forçado via -GpuProfile: $gpu"
 }
 else {
     $gpu = Get-GpuProfile
@@ -188,7 +188,7 @@ Write-Host "  GPU detectada: $gpu - $perfilNome"
 
 $ini = Join-Path $scriptsDir 'NFSMostWanted.WidescreenFix.ini'
 if (-not (Test-Path -LiteralPath $ini)) {
-    throw "WidescreenFix.ini nao encontrado em: $ini"
+    throw "WidescreenFix.ini não encontrado em: $ini"
 }
 
 switch ($gpu) {
@@ -221,17 +221,17 @@ switch ($gpu) {
         Set-IniKey $ini 'GRAPHICS' 'AutoScaleShadowsRes' '0'
         Set-IniKey $ini 'GRAPHICS' 'DisableMotionBlur' '1'
     }
-    default { throw 'Perfil de GPU invalido.' }
+    default { throw 'Perfil de GPU inválido.' }
 }
 
 # ---------------------------------------------------------------------------
 # 4) Camera (controle)
 # ---------------------------------------------------------------------------
-Write-Step 'Camera / controle'
+Write-Step 'Câmera / controle'
 $camera = 0
 if ($EnableCamera) { $camera = 1 }
 elseif (-not $SkipPrompts) {
-    $ans = Read-Host '  Habilitar camera com stick/mouse? (s/N)'
+    $ans = Read-Host '  Habilitar câmera com stick/mouse? (s/N)'
     if (-not $ans) { $ans = 'n' }
     if ($ans -match '^(s|sim|y|yes)$') { $camera = 1 }
 }
@@ -242,7 +242,7 @@ Set-IniKey $ini 'CAMERA' 'Enable' "$camera"
 # ---------------------------------------------------------------------------
 Write-Step 'Pronto!'
 Write-Host "  - Mods copiados para: $GamePath"
-Write-Host "  - Configuracao aplicada em: $ini"
+Write-Host "  - Configuração aplicada em: $ini"
 Write-Host ''
 Write-Host '  Para jogar, execute speed.exe. Os mods carregam via dinput8.dll.'
-Write-Host '  No jogo, selecione o idioma "Spanish" para usar a traducao PT-BR (GameVicio).'
+Write-Host '  No jogo, selecione o idioma "Spanish" para usar a tradução PT-BR (GameVicio).'
