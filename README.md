@@ -218,4 +218,3 @@ Para habilitar a câmera de novo, mude `Enable = 1` na seção `[CAMERA]` do
 ---
 
 Feito para facilitar a instalação da versão brasileira do NFS Most Wanted.
-Divirta-se em Rockport! 🏎️💨
