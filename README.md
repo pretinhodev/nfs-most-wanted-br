@@ -1,4 +1,4 @@
-# NFS Most Wanted — Edição Brasileira (Repack DODI + Tradução + Mods)
+# NFS Most Wanted — Edição Brasileira (Repack + Tradução + Mods)
 
 Repositório de apoio para montar sua instalação do **Need for Speed: Most Wanted Black Edition**
 com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usados.
@@ -12,8 +12,8 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 ---
 
 > ⚙️ **IMPORTANTE — ajuste para o seu PC**
-> As configurações deste repositório (`.ini` em `Mods/`) foram feitas para o **PC do autor**
-> (GPU integrada **AMD Radeon, Ryzen 5 4600G**, 1080p).
+> As configurações deste repositório (`.ini` em `Mods/`) são um ponto de partida (feitas para
+> GPU integrada AMD em 1080p).
 > **Depois de instalar o jogo, rode o `setup-config.ps1`** (veja abaixo) — ele detecta a sua GPU,
 > copia os mods e ajusta o gráfico **para o seu computador**. Não use os `.ini` direto como estão
 > sem rodar o script.
@@ -39,8 +39,8 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 ## 🔗 Links úteis
 
 ### Repack / jogo
-- **DODI Repacks** (distribuidor do repack): https://dodi-repacks.site
-  - Busque por "Need For Speed Most Wanted Black Edition" no site / rarbg mirror.
+- **DODI Repacks** (distribuidor de repack): https://dodi-repacks.site
+  - Busque por "Need For Speed Most Wanted Black Edition" no site / mirror.
 
 ### Tradução
 - **GameVicio** (tradução brasileira PT-BR): https://www.gamevicio.com
@@ -60,7 +60,6 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
   - Releases (baixe o `Release-MW-Pack.zip`, versão MW 32 bits): https://github.com/xan1242/NFS-XtendedInput/releases
 - **NFS HD Reflections** (Aero_) — reflexos em alta resolução (UG2/MW/Carbon):
   - nfsmods: https://nfsmods.xyz/mod/3363 (sem release no GitHub — só o código)
-  - > O **NFS Underground 2** tem repo próprio (scripts + mods): ver `nfs-underground-2-br`.
 - **Xbox Rain Droplets** (ThirteenAG):
   - Repositório: https://github.com/ThirteenAG/XboxRainDroplets
 - **Front-End Shadows** (Aero_) — sombras no menu inicial do MW:
@@ -69,6 +68,10 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 ---
 
 ## 🛠️ Como instalar
+
+> ⚡ **Recomendado:** rode o `setup-config.ps1` (seção **Configurador automático** abaixo).
+> Ele copia os mods **e** ajusta o gráfico para a **sua** GPU. Os passos manuais abaixo
+> são só para referência.
 
 ### 1. Instale o jogo
 1. Baixe o repack DODI do "Need for Speed Most Wanted Black Edition".
@@ -85,38 +88,25 @@ Tradução PT-BR Need for Speed Most Wanted.exe   (NSIS ~347 KB, © GameVicio)
 ```
 
 1. Baixe o instalador na página da GameVicio (link acima) e **execute** o `.exe`.
-2. Escolha a pasta de instalação do jogo e confirme. Ele aplica os arquivos na pasta `LANGUAGES\`.
-   ```
-   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\LANGUAGES\
-   ```
+2. Escolha a pasta de instalação do jogo e confirme. Ele aplica os arquivos na pasta `LANGUAGES\`
+   da raiz do jogo.
 3. No jogo, selecione o idioma **Spanish** (Espanhol) — a tradução brasileira usa esse slot.
 
 > Alternativa manual: os arquivos de tradução também estão disponíveis neste repo
 > em `Traducao-GameVicio/` — copie-os para a pasta `LANGUAGES\`, sobrescrevendo quando pedir.
 
 ### 3. Instale o ASI Loader + mods
-> ⚡ **Recomendado:** rode o `setup-config.ps1` (seção **Configurador automático** abaixo).
-> Ele copia os mods **e** ajusta o gráfico para a **sua** GPU. Os passos manuais abaixo
-> são só para referência.
-
-O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta da instalação:
-   ```
-   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
-   ```
+O `dinput8.dll` (ASI Loader) é o que carrega os `.asi`. Coloque na pasta raiz da instalação:
    - Copie `Mods/ASI-Loader/dinput8.dll` → pasta raiz da instalação.
    - Copie `Mods/WidescreenFix/NFSMostWanted.WidescreenFix.asi` e `.tpk` → pasta `scripts/`.
    - Copie `Mods/ExtraOptions/NFSMWExtraOptions.asi` → pasta `scripts/`.
    - (Opcional) Ajuste os `.ini` (configs) na pasta `scripts/`.
 
-> ⚙️ Os `.ini` deste repo estão calibrados para o **PC do autor** (AMD integrada, Ryzen 5 4600G).
-> Rodando o `setup-config.ps1` o gráfico é ajustado para a GPU da **sua máquina** (AMD integrada,
+> ⚙️ Rodando o `setup-config.ps1` o gráfico é ajustado para a GPU da **sua máquina** (AMD integrada,
 > AMD dedicada, NVIDIA ou Intel).
 
 ### 4. Emulador de servidor LAN (opcional)
 Para jogar online/LAN:
-   ```
-   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
-   ```
    - Copie `Mods/Lan-Server/server.dll` e `server.cfg` → pasta raiz da instalação.
 
 ### 5. Mod do controle (gamepad) — NFS XtendedInput
@@ -126,9 +116,6 @@ Xbox/XInput (nem a maioria dos controles modernos). O **NFS XtendedInput**
 adiciona suporte **XInput nativo** + ícones de botão + tudo rebindável.
 Ele usa o mesmo **Ultimate ASI Loader** já instalado (`dinput8.dll`), então a
 instalação é só copiar os arquivos de `Mods/XtendedInput/`:
-   ```
-   C:\Program Files (x86)\DODI-Repacks\Need For Speed Most Wanted Black Edition\
-   ```
    - Copie `NFS_XtendedInput.asi`, `NFS_XtendedInput.ini`, `NFS_XtendedInput.default.ini`
      e `nfs_cursor.cur` → pasta `scripts/`.
    - Copie `XtendedInputButtons.tpk` → pasta `GLOBAL/`.
@@ -151,7 +138,7 @@ ou **reWASD** (mapeador pago).
    Rode `speed.exe` (v1.3).
 
 > ⚠️ O Extra Options exige o **speed.exe v1.3**. Se o seu repack vier com outra versão,
-> use o "NFS Most Wanted NO DVD Crack RELOADED".
+> use o "NFS Most Wanted No-DVD Crack" correspondente.
 
 ---
 
@@ -171,7 +158,7 @@ conforme a sua GPU — sem precisar copiar arquivos na mão.
    ```
 
 O script vai:
-- Detectar a pasta do jogo (usa o caminho do DODI Repacks se existir, senão pergunta)
+- Detectar a pasta do jogo (usa o caminho padrão do repack DODI se existir, senão pergunta)
 - Copiar `dinput8.dll` (ASI Loader) e os mods (`WidescreenFix`, `ExtraOptions`, `HDReflections`, `RainDroplets`, `FEShadows`, `XtendedInput`) para `scripts/`
 - **Detectar a GPU automaticamente** (AMD integrada / AMD dedicada / NVIDIA / Intel) e ajustar o `NFSMostWanted.WidescreenFix.ini`
 - Perguntar se quer o **servidor LAN** e a **câmera com stick/mouse**
@@ -207,7 +194,7 @@ powershell -ExecutionPolicy Bypass -File setup-config.ps1 -GamePath "C:\Jogos\NF
 
 ## ⚙️ Configurações atuais do WidescreenFix
 
-Configurações otimizadas para **GPU integrada AMD (Radeon, Ryzen 5 4600G)** em 1080p:
+Configurações otimizadas para **GPU integrada AMD** em 1080p:
 
 - **`ForcedGPUVendor = 0x1002`** — força o vendor **ATI/AMD** (corrige opções de vídeo/renderer para a GPU certa)
 - **`Enable = 0`** (seção `[CAMERA]`) — **câmera com stick/mouse desativada** (o controle usa os binds padrão sem conflito no analógico direito)
