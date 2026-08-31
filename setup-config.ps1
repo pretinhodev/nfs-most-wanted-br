@@ -3,8 +3,9 @@
 .SYNOPSIS
   Configurador do Need for Speed: Most Wanted - Black Edition (mods + ajustes).
 .DESCRIPTION
-Copia os arquivos dos mods (ASI Loader, WidescreenFix, Extra Options e servidor LAN)
-    para a pasta do jogo e ajusta as configurações (.ini) conforme a sua GPU.
+Copia os arquivos dos mods (ASI Loader, WidescreenFix, Extra Options, XtendedInput,
+    HD Reflections, chuva Xbox 360, Front-End Shadows e servidor LAN) para a pasta do jogo
+    e ajusta as configurações (.ini) conforme a sua GPU.
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File setup-config.ps1
 #>
@@ -155,6 +156,16 @@ foreach ($f in 'NFSMostWanted.WidescreenFix.asi', 'NFSMostWanted.WidescreenFix.t
 }
 foreach ($f in 'NFSMWExtraOptions.asi', 'NFSMWExtraOptionsSettings.ini') {
     Copy-IfExists (Join-Path $RepoRoot "Mods\ExtraOptions\$f") (Join-Path $scriptsDir $f)
+}
+
+foreach ($f in 'NFSMWHDReflections.asi', 'NFSMWHDReflections.ini') {
+    Copy-IfExists (Join-Path $RepoRoot "Mods\HDReflections\$f") (Join-Path $scriptsDir $f)
+}
+foreach ($f in 'NFSMostWanted.XboxRainDroplets.asi', 'NFSMostWanted.XboxRainDroplets.ini') {
+    Copy-IfExists (Join-Path $RepoRoot "Mods\RainDroplets\$f") (Join-Path $scriptsDir $f)
+}
+foreach ($f in 'NFSMWFEShadows.asi', 'NFSMWFEShadows.ini') {
+    Copy-IfExists (Join-Path $RepoRoot "Mods\FEShadows\$f") (Join-Path $scriptsDir $f)
 }
 
 Write-Host '  XtendedInput (controle)...'

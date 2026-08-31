@@ -30,6 +30,9 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 | `Mods/WidescreenFix/` | `NFSMostWanted.WidescreenFix.asi` + `.tpk` + `.ini` (Widescreen Fix) |
 | `Mods/XtendedInput/` | `NFS_XtendedInput.asi` + `.ini` + `.default.ini` + `XtendedInputButtons.tpk` + `nfs_cursor.cur` (XtendedInput) |
 | `Mods/Lan-Server/` | `server.dll` + `server.cfg` — emulador de servidor LAN |
+| `Mods/HDReflections/` | `NFSMWHDReflections.asi` + `.ini` — reflexos HD (Aero) |
+| `Mods/RainDroplets/` | `NFSMostWanted.XboxRainDroplets.asi` + `.ini` — gotas de chuva no "vidro" (Xbox) |
+| `Mods/FEShadows/` | `NFSMWFEShadows.asi` + `.ini` — sombras no menu inicial (Front-End Shadows) |
 
 ---
 
@@ -55,6 +58,13 @@ com a **tradução brasileira (GameVicio)** e os **mods de correção** mais usa
 - **NFS XtendedInput** (xan1242) — suporte a controle/gamepad moderno:
   - Repositório: https://github.com/xan1242/NFS-XtendedInput
   - Releases (baixe o `Release-MW-Pack.zip`, versão MW 32 bits): https://github.com/xan1242/NFS-XtendedInput/releases
+- **NFS HD Reflections** (Aero_) — reflexos em alta resolução (UG2/MW/Carbon):
+  - nfsmods: https://nfsmods.xyz/mod/3363 (sem release no GitHub — só o código)
+  - > O **NFS Underground 2** tem repo próprio (scripts + mods): ver `nfs-underground-2-br`.
+- **Xbox Rain Droplets** (ThirteenAG):
+  - Repositório: https://github.com/ThirteenAG/XboxRainDroplets
+- **Front-End Shadows** (Aero_) — sombras no menu inicial do MW:
+  - nfsmods: https://nfsmods.xyz/mod/3005 (sem release no GitHub)
 
 ---
 
@@ -162,7 +172,7 @@ conforme a sua GPU — sem precisar copiar arquivos na mão.
 
 O script vai:
 - Detectar a pasta do jogo (usa o caminho do DODI Repacks se existir, senão pergunta)
-- Copiar `dinput8.dll` (ASI Loader) e os mods (`WidescreenFix`, `ExtraOptions`) para `scripts/`
+- Copiar `dinput8.dll` (ASI Loader) e os mods (`WidescreenFix`, `ExtraOptions`, `HDReflections`, `RainDroplets`, `FEShadows`, `XtendedInput`) para `scripts/`
 - **Detectar a GPU automaticamente** (AMD integrada / AMD dedicada / NVIDIA / Intel) e ajustar o `NFSMostWanted.WidescreenFix.ini`
 - Perguntar se quer o **servidor LAN** e a **câmera com stick/mouse**
 
