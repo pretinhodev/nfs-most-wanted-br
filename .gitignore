@@ -23,3 +23,6 @@ speed.exe
 # Sistema
 Thumbs.db
 Desktop.ini
+
+# Artefatos graphify
+graphify-out/
